@@ -50,12 +50,20 @@ def main(secret_word):
     while lives > 0 and secret_word != ''.join(word_guess):
         guess = user_input("Guess a letter! ")
         find_index(secret_word, guess)
-        indicies = find_index
-        submit_letter(guess, word_guess, indicies)
-        print(submit_letter)
-        print('Congrats you found a letter! ')
-        
-
+        indicies = find_index(secret_word, guess)
+        if len(indicies) > 0:
+            submit_letter(guess, word_guess, indicies)
+            new_word_guess = submit_letter(guess, word_guess, indicies)
+            print(' '.join(new_word_guess))
+            print('Congrats you found a letter! ')
+        else: 
+            print('Sorry thats a bad guess!')
+            lives -= 1
+            print('You have ' + str(lives) + ' guesses left')
+    if lives == 0:
+        print('Sorry better luck next time!')
+    else:
+        print("congrats you won!")
 
 
 
