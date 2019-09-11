@@ -26,14 +26,20 @@ def word_init(secret_word):
     return ['_'] * len(secret_word)
 
 
-def find_index(str, char):
-    user_input = user_input(prompt)
-    letter_index = [i for i, x in enumerate(secret_word) if x == user_input]
+def get_correct_index(str, find_char):
+    indicies = list()
 
+    for index, char in enumerate(str):
+        if char == find_char:
+            indicies.append(index)
+    
+    return indicies
 
 def is_guess_in_word():
     pass
 
+def main(secret_word):
+    word_guess = word_init(secret_word)
 
 
 #test
@@ -47,3 +53,6 @@ def test():
 
 
 secret_word = load_word()
+
+print('Welcome to the spaceman game! ')
+main(secret_word)
