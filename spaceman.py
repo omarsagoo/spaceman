@@ -26,7 +26,7 @@ def word_init(secret_word):
     return ['_'] * len(secret_word)
 
 
-def get_correct_index(str, find_char):
+def find_index(str, find_char):
     indicies = list()
 
     for index, char in enumerate(str):
@@ -35,11 +35,29 @@ def get_correct_index(str, find_char):
     
     return indicies
 
+
+def submit_letter(char, underscore, indicies):
+    for index in indicies:
+        underscore[index] = char
+    return underscore
+
 def is_guess_in_word():
     pass
 
 def main(secret_word):
     word_guess = word_init(secret_word)
+    lives = 7
+    while lives > 0 and secret_word != ''.join(word_guess):
+        guess = user_input("Guess a letter! ")
+        find_index(secret_word, guess)
+        indicies = find_index
+        submit_letter(guess, word_guess, indicies)
+        print(submit_letter)
+        print('Congrats you found a letter! ')
+        
+
+
+
 
 
 #test
@@ -54,5 +72,5 @@ def test():
 
 secret_word = load_word()
 
-print('Welcome to the spaceman game! ')
-main(secret_word)
+# print('Welcome to the spaceman game! ')
+# main(secret_word)
