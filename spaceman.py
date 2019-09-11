@@ -11,44 +11,46 @@ def load_word():
     return secret_word
 
 #Handles all user input with error handling
+#Jake Shams showed me this recursive solution
 def user_input(prompt):
-    user_input = input(prompt)
-
-    if len(user_input) > 1:
-        print('you can only input one letter at a time! ')
-    elif user_input.isalpha() == False:
-        print("You must use letters only! ")
-
+    user_input =  input(prompt)
+    if len(user_input) != 1:
+        return user_input("Input can only be one letter: ")
+    elif not user_input.isalpha():
+        return user_input("Input must be a letter: ")
     return user_input
+
+
+    
 
 # creates an array to store the Users correct guesses
 def word_init(secret_word):
     return ['_'] * len(secret_word)
 
-
-def find_index(str, find_char):
+# returns the index of the letter that is guessed
+def find_index(secret_word, guess):
     indicies = list()
 
-    for index, char in enumerate(str):
-        if char == find_char:
+    for index, char in enumerate(secret_word):
+        if char == guess:
             indicies.append(index)
     
     return indicies
 
-
+#
 def submit_letter(char, underscore, indicies):
     for index in indicies:
         underscore[index] = char
     return underscore
 
-def is_guess_in_word():
-    pass
 
 def main(secret_word):
     word_guess = word_init(secret_word)
     lives = 7
+    guessed_ltrs = list()
     while lives > 0 and secret_word != ''.join(word_guess):
         guess = user_input("Guess a letter! ")
+        guessed_ltrs.append(guess)
         find_index(secret_word, guess)
         indicies = find_index(secret_word, guess)
         if len(indicies) > 0:
@@ -60,12 +62,11 @@ def main(secret_word):
             print('Sorry thats a bad guess!')
             lives -= 1
             print('You have ' + str(lives) + ' guesses left')
+        print(guessed_ltrs)
     if lives == 0:
         print('Sorry better luck next time!')
     else:
         print("congrats you won!")
-
-
 
 
 #test
