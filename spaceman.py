@@ -40,6 +40,18 @@ def add_letter_to_word_guess(char, underscore, indicies):
         underscore[index] = char
     return underscore
 
+# restarts the main function
+def restart():
+    user_input = input('Would you like to play again? type y, if not type n: ')
+
+    if user_input == "y":
+        return main()
+    elif user_input == "n":
+        print("Thank you for playing!")
+    else:
+        print("That wasn't one of the prompts!!!!! try again! ")
+        return restart()
+
 
 def main():
     secret_word = load_word()
@@ -72,9 +84,10 @@ def main():
     if lives == 0:
         print("Your secret word was: " + secret_word)
         print('Sorry better luck next time!')
-        #return main() -- make new function that asks the user if they want to start again
+        restart()
     else:
         print("congrats you won!")
+        restart()
 
 
 #test
